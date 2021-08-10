@@ -30,7 +30,7 @@ git clone --single-branch --branch v2.0 https://invent.kde.org/maui/mauikit-imag
 
 mv mauikit-imagetools/* .
 
-rm -rf mauikit examples LICENSES README.md
+rm -rf mauikit-imagetools examples LICENSES README.md
 
 sed -i 's+ecm_find_qmlmodule(org.kde.kquickimageeditor 1.0)+ecm_find_qmlmodule(kquickimageeditor 1.0)+g' CMakeLists.txt
 
