@@ -32,6 +32,8 @@ mv mauikit-imagetools/* .
 
 rm -rf mauikit examples LICENSES README.md
 
+sed -i 's+ecm_find_qmlmodule(org.kde.kquickimageeditor 1.0)+ecm_find_qmlmodule(kquickimageeditor 1.0)+g' CMakeLists.txt
+
 ### Build Deb
 
 mkdir source
