@@ -29,16 +29,16 @@ Depends: libmauikit,
          ${shlibs:Depends}
 Conflicts: qml-module-org-kde-mauikit-imagetools
 Replaces: qml-module-org-kde-mauikit-imagetools
-Description: MauiKit File Browsing utilities and controls
- MauiKit File Browsing controls and utils.
+Description: MauiKit Image Tools Components
+ MauiKit Image Tools Components.
  .
  This package contains the mauikit imagetools qml module.
 
 Package: libmauikitimagetools1
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: MauiKit File Browsing utilities and controls
- MauiKit File Browsing controls and utils.
+Description: MauiKit Image Tools Components
+ MauiKit Image Tools Components.
  .
  This package contains the mauikit imagetools library.
 
@@ -48,7 +48,7 @@ Depends: libmauikitimagetools1 (= ${binary:Version}),
          qml-module-org-mauikit-imagetools,
          ${misc:Depends},
          ${shlibs:Depends}
-Description: MauiKit File Browsing utilities and controls
- MauiKit File Browsing controls and utils.
+Description: MauiKit Image Tools Components
+ MauiKit Image Tools Components.
  .
  This package contains mauikit imagetools development files.
