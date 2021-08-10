@@ -1,16 +1,19 @@
-dist: focal
+sudo: required
+
+arch:
+  - arm64
 
 before_install:
   - gem install package_cloud
 
 script:
-  - sudo ./travis-build.sh
+  - sudo docker run --rm -v $(pwd)/:/build/ -w /build/ arm64v8/debian:unstable /bin/bash travis-build.sh
   - package_cloud push nitrux/repo/debian/trixie *.deb
 
 branches:
   only:
-    - main
+    - arm64
 
 notifications:
   email: false
-  
+

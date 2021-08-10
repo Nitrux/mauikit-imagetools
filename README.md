@@ -1,4 +1,4 @@
-# MauiKit imagetools [![Build Status](https://travis-ci.org/Nitrux/mauikit-imagetools.svg?branch=main)](https://travis-ci.org/Nitrux/mauikit-imagetools)
+# MauiKit imagetools [![Build Status](https://travis-ci.org/Nitrux/mauikit-imagetools.svg?branch=arm64)](https://travis-ci.org/Nitrux/mauikit-imagetools)
 
 MauiKit-imagetools from Git master.
 
