@@ -44,7 +44,8 @@ DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 	libkf5kio-dev \
 	mauikit-dev \
 	qtpositioning5-dev \
-	libexiv2-dev
+	libexiv2-dev \
+	kquickimageeditor
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
 	extra-cmake-modules
