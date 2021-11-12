@@ -43,6 +43,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 	libkf5i18n-dev \
 	libkf5kio-dev \
 	mauikit-dev \
+	qtbase5-dev \
 	qtpositioning5-dev \
 	libexiv2-dev \
 	kquickimageeditor
