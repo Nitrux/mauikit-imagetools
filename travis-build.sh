@@ -2,41 +2,111 @@
 
 set -x
 
-apt -qq update
-apt -qq -yy install equivs curl git wget gnupg2
+### Install Build Tools #1
 
-### FIXME - the container mauikit/ubuntu-18.04-amd64 does have the neon repo but for some idiotic reason it isn't working here
+DEBIAN_FRONTEND=noninteractive apt -qq update
+DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
+	appstream \
+	automake \
+	autotools-dev \
+	build-essential \
+	checkinstall \
+	cmake \
+	curl \
+	devscripts \
+	equivs \
+	extra-cmake-modules \
+	gettext \
+	git \
+	gnupg2 \
+	lintian \
+	wget
+
+### Add Neon Sources
 
 wget -qO /etc/apt/sources.list.d/neon-user-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.neon.user
 
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys \
+DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --recv-keys \
 	55751E5D > /dev/null
 
-curl -L https://packagecloud.io/nitrux/repo/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
 
-wget -qO /etc/apt/sources.list.d/nitrux-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux
+wget -qO /etc/apt/sources.list.d/nitrux-testing-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux.testing
 
-apt -qq update
+DEBIAN_FRONTEND=noninteractive apt -qq update
 
-### Install Dependencies
+### Install Package Build Dependencies #2
+### Imagetools needs ECM > 5.70
 
-DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends devscripts debhelper gettext lintian build-essential automake autotools-dev cmake extra-cmake-modules appstream qml-module-qtquick-controls2 qml-module-qtquick-shapes qml-module-qtgraphicaleffects mauikit-dev qtpositioning5-dev libexiv2-dev kquickimageeditor
+DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
+	libkf5coreaddons-dev \
+	libkf5i18n-dev \
+	libkf5kio-dev \
+	mauikit-dev \
+	qtpositioning5-dev \
+	libexiv2-dev
 
-mk-build-deps -i -t "apt-get --yes" -r
+DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
+	extra-cmake-modules
 
-### Clone repo.
+### Clone Repository
 
 git clone --depth 1 --branch v2.1 https://invent.kde.org/maui/mauikit-imagetools.git
 
-mv mauikit-imagetools/* .
+rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
-rm -rf mauikit-imagetools examples LICENSES README.md
+### Compile Source
 
-sed -i 's+ecm_find_qmlmodule(org.kde.kquickimageeditor 1.0)+ecm_find_qmlmodule(kquickimageeditor 1.0)+g' CMakeLists.txt
+mkdir -p mauikit-imagetools/build && cd mauikit-imagetools/build
 
-### Build Deb
+cmake \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DENABLE_BSYMBOLICFUNCTIONS=OFF \
+	-DQUICK_COMPILER=ON \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_SYSCONFDIR=/etc \
+	-DCMAKE_INSTALL_LOCALSTATEDIR=/var \
+	-DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON \
+	-DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON \
+	-DCMAKE_INSTALL_RUNSTATEDIR=/run "-GUnix Makefiles" \
+	-DCMAKE_VERBOSE_MAKEFILE=ON \
+	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ..
 
-mkdir source
-mv ./* source/ # Hack for debuild
-cd source
-debuild -b -uc -us
+make
+
+### Run checkinstall and Build Debian Package
+### DO NOT USE debuild, screw it
+
+>> description-pak printf "%s\n" \
+	'A free and modular front-end framework for developing user experiences.' \
+	'' \
+	'MauiKit Image Tools Components.' \
+	'' \
+	'Maui stands for Multi-Adaptable User Interface and allows ' \
+	'any Maui app to run on various platforms + devices,' \
+	'like Linux Desktop and Phones, Android, or Windows.' \
+	'' \
+	'This package contains the MauiKit imagetools shared library, the MauiKit imagetools qml module' \
+	'and the MauiKit imagetools development files.' \
+	'' \
+	''
+
+checkinstall -D -y \
+	--install=no \
+	--fstrans=yes \
+	--pkgname=mauikit-imagetools \
+	--pkgversion=2.1.0 \
+	--pkgarch=amd64 \
+	--pkgrelease="1" \
+	--pkglicense=LGPL-3 \
+	--pkggroup=lib \
+	--pkgsource=mauikit-imagetools \
+	--pakdir=../.. \
+	--maintainer="Uri Herrera <uri_herrera@nxos.org>" \
+	--provides=libmauikitimagetools1,libmauikitimagetools-dev,qml-module-org-mauikit-imagetools \
+	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,libmauikit \(\>= 2.1.0\),qml-module-org-kde-kirigami2,qml-module-org-kde-mauikit \(\>= 2.1.0\)" \
+	--nodoc \
+	--strip=no \
+	--stripso=yes \
+	--reset-uids=yes \
+	--deldesc=yes
