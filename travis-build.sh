@@ -105,8 +105,8 @@ checkinstall -D -y \
 	--pkgsource=mauikit-imagetools \
 	--pakdir=../.. \
 	--maintainer="Uri Herrera <uri_herrera@nxos.org>" \
-	--provides=libmauikitimagetools1,libmauikitimagetools-dev,qml-module-org-mauikit-imagetools \
-	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,libmauikit \(\>= 2.1.0\),qml-module-org-kde-kirigami2,qml-module-org-kde-mauikit \(\>= 2.1.0\)" \
+	--provides=mauikit-imagetools \
+	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit \(\>= 2.1.0\),qml-module-org-kde-kirigami2" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
