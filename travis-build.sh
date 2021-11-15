@@ -39,14 +39,14 @@ DEBIAN_FRONTEND=noninteractive apt -qq update
 ### Imagetools needs ECM > 5.70
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
+	kquickimageeditor \
+	libexiv2-dev \
 	libkf5coreaddons-dev \
 	libkf5i18n-dev \
 	libkf5kio-dev \
 	mauikit \
 	qtbase5-dev \
-	qtpositioning5-dev \
-	libexiv2-dev \
-	kquickimageeditor
+	qtpositioning5-dev
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
 	extra-cmake-modules
