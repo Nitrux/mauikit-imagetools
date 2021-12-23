@@ -44,7 +44,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
 	libkf5coreaddons-dev \
 	libkf5i18n-dev \
 	libkf5kio-dev \
-	mauikit \
+	mauikit-git \
 	qtbase5-dev \
 	qtpositioning5-dev
 
@@ -53,7 +53,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
 
 ### Clone Repository
 
-git clone --depth 1 --branch v2.1 https://invent.kde.org/maui/mauikit-imagetools.git
+git clone --depth 1 --branch master https://invent.kde.org/maui/mauikit-imagetools.git
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
@@ -96,8 +96,8 @@ make
 checkinstall -D -y \
 	--install=no \
 	--fstrans=yes \
-	--pkgname=mauikit-imagetools \
-	--pkgversion=2.1.0 \
+	--pkgname=mauikit-imagetools-git \
+	--pkgversion=2.1.1+git \
 	--pkgarch=amd64 \
 	--pkgrelease="1" \
 	--pkglicense=LGPL-3 \
@@ -105,8 +105,8 @@ checkinstall -D -y \
 	--pkgsource=mauikit-imagetools \
 	--pakdir=../.. \
 	--maintainer=uri_herrera@nxos.org \
-	--provides=mauikit-imagetools \
-	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit \(\>= 2.1.0\),qml-module-org-kde-kirigami2" \
+	--provides=mauikit-imagetools-git \
+	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.1.1\),qml-module-org-kde-kirigami2" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
