@@ -106,7 +106,7 @@ checkinstall -D -y \
 	--pakdir=../.. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools-git \
-	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.1.1\),qml-module-org-kde-kirigami2" \
+	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.1.1+git\),qml-module-org-kde-kirigami2" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
