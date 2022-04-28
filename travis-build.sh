@@ -53,7 +53,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
 
 ### Clone Repository
 
-git clone --depth 1 --branch v2.1.1 https://invent.kde.org/maui/mauikit-imagetools.git
+git clone --depth 1 --branch master https://invent.kde.org/maui/mauikit-imagetools.git
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
@@ -97,7 +97,7 @@ checkinstall -D -y \
 	--install=no \
 	--fstrans=yes \
 	--pkgname=mauikit-imagetools-git \
-	--pkgversion=2.1.1+git+2 \
+	--pkgversion=2.1.2+git+1 \
 	--pkgarch=amd64 \
 	--pkgrelease="1" \
 	--pkglicense=LGPL-3 \
@@ -106,7 +106,7 @@ checkinstall -D -y \
 	--pakdir=../.. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools-git \
-	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.1.1+git\),qml-module-org-kde-kirigami2" \
+	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.1.2+git\),qml-module-org-kde-kirigami2" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
