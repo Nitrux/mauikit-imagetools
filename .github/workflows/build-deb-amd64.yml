@@ -1,4 +1,4 @@
-name: MauiKit Accounts Deb
+name: MauiKit Imagetools Deb
 
 on:
   workflow_dispatch:

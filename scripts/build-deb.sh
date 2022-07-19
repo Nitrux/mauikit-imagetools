@@ -75,7 +75,7 @@ checkinstall -D -y \
 	--pkglicense=LGPL-3 \
 	--pkggroup=libs \
 	--pkgsource=mauikit-imagetools \
-	--pakdir=../.. \
+	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools-git \
 	--requires="kquickimageditor,libc6,libexiv2-27,libqt5core5a,libqt5positioning5,libqt5positioning5-plugins,libqt5positioningquick5,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.2.0+git\),qml-module-org-kde-kirigami2" \

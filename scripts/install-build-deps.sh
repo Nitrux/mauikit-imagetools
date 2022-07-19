@@ -8,13 +8,17 @@ fi
 
 $APT_COMMAND update -q
 $APT_COMMAND install -qy --no-install-recommends \
+    appstream \
     argagg-dev \
     automake \
+    autotools-dev \
     build-essential \
     checkinstall \
     cmake \
     curl \
     desktop-file-utils \
+    devscripts \
+    equivs \
     extra-cmake-modules \
     gettext \
     git \
@@ -22,7 +26,6 @@ $APT_COMMAND install -qy --no-install-recommends \
     kquickimageeditor-dev \
     libappimage-dev \
     libcurl4-openssl-dev \
-    libexiv2-dev \
     libexiv2-dev \
     libfuse-dev \
     libgcrypt20-dev \
@@ -40,6 +43,7 @@ $APT_COMMAND install -qy --no-install-recommends \
     libkf5notifications-dev \
     libkf5service-dev \
     libkf5solid-dev \
+    libkf5syntaxhighlighting-dev \
     libkf5widgetsaddons-dev \
     libkf5windowsystem-dev \
     libkf5xmlgui-dev \
@@ -49,11 +53,14 @@ $APT_COMMAND install -qy --no-install-recommends \
     libtool \
     libxcb-icccm4-dev \
     libxcb-shape0-dev \
+    lintian \
     nlohmann-json3-dev \
+    qml-module-qtgraphicaleffects \
+    qml-module-qtquick-controls2 \
+    qml-module-qtquick-shapes \
     qtbase5-dev \
     qtdeclarative5-dev \
     qtmultimedia5-dev \
     qtpositioning5-dev \
     qtquickcontrols2-5-dev \
     xxd
-    
