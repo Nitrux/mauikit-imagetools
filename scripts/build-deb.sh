@@ -1,65 +1,38 @@
-#!/bin/bash
+#! /bin/bash
 
 set -x
 
-### Install Build Tools #1
-
-DEBIAN_FRONTEND=noninteractive apt -qq update
-DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
-	appstream \
-	automake \
-	autotools-dev \
-	build-essential \
-	checkinstall \
-	cmake \
-	curl \
-	devscripts \
-	equivs \
-	extra-cmake-modules \
-	gettext \
-	git \
-	gnupg2 \
-	lintian \
-	wget
-
-### Add Neon Sources
+### Update sources
 
 wget -qO /etc/apt/sources.list.d/neon-user-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.neon.user
+
+wget -qO /etc/apt/sources.list.d/nitrux-main-compat-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux
+
+wget -qO /etc/apt/sources.list.d/nitrux-testing-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux.testing
 
 DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --recv-keys \
 	55751E5D > /dev/null
 
+curl -L https://packagecloud.io/nitrux/repo/gpgkey | apt-key add -;
+curl -L https://packagecloud.io/nitrux/compat/gpgkey | apt-key add -;
 curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
-
-wget -qO /etc/apt/sources.list.d/nitrux-testing-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux.testing
 
 DEBIAN_FRONTEND=noninteractive apt -qq update
 
 ### Install Package Build Dependencies #2
-### Imagetools needs ECM > 5.70
 
 DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
-	kquickimageeditor \
-	libexiv2-dev \
-	libkf5coreaddons-dev \
-	libkf5i18n-dev \
-	libkf5kio-dev \
-	mauikit-git \
-	qtbase5-dev \
-	qtpositioning5-dev
+	mauikit-git
 
-DEBIAN_FRONTEND=noninteractive apt -qq -yy install --only-upgrade \
-	extra-cmake-modules
+### Download Source
 
-### Clone Repository
-
-git clone --depth 1 --branch master https://invent.kde.org/maui/mauikit-imagetools.git
+git clone --depth 1 --branch $MAUIKIT_IMAGETOOLS_BRANCH https://invent.kde.org/maui/mauikit-imagetools.git
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
 ### Compile Source
 
-mkdir -p mauikit-imagetools/build && cd mauikit-imagetools/build
+mkdir -p build && cd build
 
 cmake \
 	-DCMAKE_INSTALL_PREFIX=/usr \
@@ -72,12 +45,11 @@ cmake \
 	-DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON \
 	-DCMAKE_INSTALL_RUNSTATEDIR=/run "-GUnix Makefiles" \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ..
+	-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu ../mauikit-imagetools/
 
-make
+make -j$(nproc)
 
 ### Run checkinstall and Build Debian Package
-### DO NOT USE debuild, screw it
 
 >> description-pak printf "%s\n" \
 	'A free and modular front-end framework for developing user experiences.' \
@@ -97,7 +69,7 @@ checkinstall -D -y \
 	--install=no \
 	--fstrans=yes \
 	--pkgname=mauikit-imagetools-git \
-	--pkgversion=2.2.0+git+1 \
+	--pkgversion=$PACKAGE_VERSION \
 	--pkgarch=amd64 \
 	--pkgrelease="1" \
 	--pkglicense=LGPL-3 \
@@ -106,7 +78,7 @@ checkinstall -D -y \
 	--pakdir=../.. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools-git \
-	--requires="libc6,libqt5core5a,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.2.0+git\),qml-module-org-kde-kirigami2" \
+	--requires="kquickimageditor,libc6,libexiv2-27,libqt5core5a,libqt5positioning5,libqt5positioning5-plugins,libqt5positioningquick5,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.2.0+git\),qml-module-org-kde-kirigami2" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
