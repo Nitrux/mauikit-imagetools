@@ -4,24 +4,19 @@ set -x
 
 ### Update sources
 
-wget -qO /etc/apt/sources.list.d/neon-user-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.neon.user
-
 wget -qO /etc/apt/sources.list.d/nitrux-main-compat-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux
 
 wget -qO /etc/apt/sources.list.d/nitrux-testing-repo.list https://raw.githubusercontent.com/Nitrux/iso-tool/development/configs/files/sources.list.nitrux.testing
-
-DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --recv-keys \
-	55751E5D > /dev/null
 
 curl -L https://packagecloud.io/nitrux/repo/gpgkey | apt-key add -;
 curl -L https://packagecloud.io/nitrux/compat/gpgkey | apt-key add -;
 curl -L https://packagecloud.io/nitrux/testing/gpgkey | apt-key add -;
 
-DEBIAN_FRONTEND=noninteractive apt -qq update
+apt -qq update
 
 ### Install Package Build Dependencies #2
 
-DEBIAN_FRONTEND=noninteractive apt -qq -yy install --no-install-recommends \
+apt -qq -yy install --no-install-recommends \
 	mauikit-git
 
 ### Download Source
