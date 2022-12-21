@@ -75,7 +75,7 @@ checkinstall -D -y \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools-git \
-	--requires="kquickimageeditor,libc6,libexiv2-27,libopencv-core406,libqt5core5a,libqt5positioning5,libqt5positioning5-plugins,libqt5positioningquick5,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.2.1+git\),qml-module-org-kde-kirigami2" \
+	--requires="kquickimageeditor,libc6,libexiv2-27,liblept5,libopencv-core406,libqt5core5a,libqt5positioning5,libqt5positioning5-plugins,libqt5positioningquick5,libqt5qml5,libqt5sql5,libstdc++6,mauikit-git \(\>= 2.2.1+git\),qml-module-org-kde-kirigami2,tesseract-ocr" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \

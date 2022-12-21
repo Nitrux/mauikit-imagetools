@@ -23,10 +23,12 @@ $APT_COMMAND install -qy --no-install-recommends \
     gnupg2 \
     lintian \
     kquickimageeditor-dev \
+    libleptonica-dev \
     libexiv2-dev \
     libkf5coreaddons-dev \
     libkf5i18n-dev \
     libkf5kio-dev \
     libopencv-dev \
     qtbase5-dev \
-    qtpositioning5-dev
+    qtpositioning5-dev \
+    tesseract-ocr
