@@ -29,6 +29,6 @@ $APT_COMMAND install -qy --no-install-recommends \
     libkf5i18n-dev \
     libkf5kio-dev \
     libopencv-dev \
+    libtesseract-dev \
     qtbase5-dev \
     qtpositioning5-dev \
-    tesseract-ocr
