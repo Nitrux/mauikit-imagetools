@@ -31,4 +31,4 @@ $APT_COMMAND install -qy --no-install-recommends \
     libopencv-dev \
     libtesseract-dev \
     qtbase5-dev \
-    qtpositioning5-dev \
+    qtpositioning5-dev
