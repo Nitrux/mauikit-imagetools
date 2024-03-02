@@ -21,6 +21,7 @@ $APT_COMMAND install -qy --no-install-recommends \
     gettext \
     git \
     gnupg2 \
+    kquickimageeditor-dev \
     lintian \
     kquickimageeditor-dev \
     libleptonica-dev \
