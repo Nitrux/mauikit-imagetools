@@ -30,6 +30,9 @@ BUILD_DEPS='
     libkf6iconthemes-dev
     libkf6kio-dev
     libleptonica-dev
+    libqt6positioning6
+    libqt6positioning6-plugins
+    libqt6positioningquick6
     lintian
     qt6-base-dev
     qt6-base-private-dev
