@@ -38,6 +38,7 @@ BUILD_DEPS='
     qt6-multimedia-dev
     qt6-positioning-dev
     qt6-svg-dev
+    tesseract-ocr
 '
 
 $APT_COMMAND update -q
