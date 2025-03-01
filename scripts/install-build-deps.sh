@@ -1,35 +1,43 @@
 #!/bin/bash
 
 if [ "$EUID" -ne 0 ]; then
-    APT_COMMAND="sudo apt-get"
+    APT_COMMAND="sudo apt"
 else
-    APT_COMMAND="apt-get"
+    APT_COMMAND="apt"
 fi
 
+BUILD_DEPS='
+    appstream
+    automake
+    autotools-dev
+    build-essential
+    checkinstall
+    cmake
+    curl
+    devscripts
+    equivs
+    extra-cmake-modules
+    gettext
+    git
+    gnupg2
+    kquickimageeditor-dev
+    libexiv2-dev
+    libkf6archive-dev
+    libkf6config-dev
+    libkf6coreaddons-dev
+    libkf6filemetadata-dev
+    libkf6i18n-dev
+    libkf6iconthemes-dev
+    libkf6kio-dev
+    libleptonica-dev
+    lintian
+    qt6-base-dev
+    qt6-base-private-dev
+    qt6-declarative-dev
+    qt6-declarative-private-dev
+    qt6-multimedia-dev
+    qt6-svg-dev
+'
+
 $APT_COMMAND update -q
-$APT_COMMAND install -qy --no-install-recommends \
-    appstream \
-    automake \
-    autotools-dev \
-    build-essential \
-    checkinstall \
-    cmake \
-    curl \
-    devscripts \
-    equivs \
-    extra-cmake-modules \
-    gettext \
-    git \
-    gnupg2 \
-    kquickimageeditor-dev \
-    lintian \
-    kquickimageeditor-dev \
-    libleptonica-dev \
-    libexiv2-dev \
-    libkf5coreaddons-dev \
-    libkf5i18n-dev \
-    libkf5kio-dev \
-    libopencv-dev \
-    libtesseract-dev \
-    qtbase5-dev \
-    qtpositioning5-dev
+$APT_COMMAND install -y - --no-install-recommends $BUILD_DEPS
