@@ -30,6 +30,7 @@ BUILD_DEPS='
     libkf6iconthemes-dev
     libkf6kio-dev
     libleptonica-dev
+    libopencv-dev
     libtesseract-dev
     lintian
     qt6-base-dev
