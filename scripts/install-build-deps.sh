@@ -56,6 +56,7 @@ $APT_COMMAND install -y - --no-install-recommends \
     gnupg2 \
     kquickimageeditor-dev \
     libexiv2-dev \
+    libkexiv2qt6-dev \
     libkf6archive-dev \
     libkf6config-dev \
     libkf6coreaddons-dev \
