@@ -36,6 +36,7 @@ rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
 
 # -- Replace the incorrect KAboutLicense::LicenseKey calls with the correct KAboutData::License enum
+# -- Stop using the incomplete LicenseKey enum and instead use the string-based constructor that expects an SPDX identifier.
 
 TARGET_FILE="mauikit-imagetools/src/code/moduleinfo.cpp"
 
