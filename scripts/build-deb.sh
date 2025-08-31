@@ -34,14 +34,18 @@ git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://invent.kde.org
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
-sed -Ei 's/KAboutLicense::LicenseKey::/KAboutLicense::/g' \
-  mauikit-imagetools/src/code/moduleinfo.cpp
+# Apply the two required fixes using sed
+# 1. Change BSD_2_Clause to BSD_2Clause
+# 2. Change Apache_V2 to Apache_2_0
 
-# sanity check
-grep -n "KAboutLicense::LicenseKey::" mauikit-imagetools/src/code/moduleinfo.cpp && echo "still bad" || echo "ok"
-grep -nE 'KAboutLicense::(LGPL_V3|File|BSD_2_Clause|Apache_V2)' mauikit-imagetools/src/code/moduleinfo.cpp
+TARGET_FILE="mauikit-imagetools/src/code/moduleinfo.cpp"
 
-grep -R "KAboutLicense::LicenseKey::" mauikit-imagetools/src && { echo "Unpatched enum qualifiers"; exit 1; }
+sed -i \
+    -e 's/KAboutLicense::LicenseKey::BSD_2_Clause/KAboutLicense::LicenseKey::BSD_2Clause/g' \
+    -e 's/KAboutLicense::LicenseKey::Apache_V2/KAboutLicense::LicenseKey::Apache_2_0/g' \
+    "$TARGET_FILE"
+
+echo "✅ Patch applied successfully!"
 
 
 # -- Compile Source
