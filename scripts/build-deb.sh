@@ -34,11 +34,16 @@ git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://invent.kde.org
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
-sed -i 's/KAboutLicense::LicenseKey::BSD_2_Clause/KAboutLicense::BSD_2_Clause/g' \
+grep -n "LicenseKey::" -R mauikit-imagetools/src || echo "no matches"
+sed -n '1,120p' mauikit-imagetools/src/code/moduleinfo.cpp | nl -ba | sed -n '40,80p'
+
+sed -Ei 's/KAboutLicense::LicenseKey::BSD_2_Clause/KAboutLicense::BSD_2_Clause/g;
+         s/KAboutLicense::LicenseKey::Apache_V2/KAboutLicense::Apache_V2/g' \
   mauikit-imagetools/src/code/moduleinfo.cpp
 
-sed -i 's/KAboutLicense::LicenseKey::Apache_V2/KAboutLicense::Apache_V2/g' \
-  mauikit-imagetools/src/code/moduleinfo.cpp
+grep -n "KAboutLicense::" mauikit-imagetools/src/code/moduleinfo.cpp
+
+grep -R "KAboutLicense::LicenseKey::" mauikit-imagetools/src && { echo "Unpatched enum qualifiers"; exit 1; }
 
 
 # -- Compile Source
