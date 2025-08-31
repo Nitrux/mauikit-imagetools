@@ -34,6 +34,12 @@ git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://invent.kde.org
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
+sed -i 's/KAboutLicense::LicenseKey::BSD_2_Clause/KAboutLicense::BSD_2_Clause/g' \
+  mauikit-imagetools/src/code/moduleinfo.cpp
+
+sed -i 's/KAboutLicense::LicenseKey::Apache_V2/KAboutLicense::Apache_V2/g' \
+  mauikit-imagetools/src/code/moduleinfo.cpp
+
 
 # -- Compile Source
 
