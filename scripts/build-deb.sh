@@ -34,9 +34,8 @@ git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://invent.kde.org
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
-# Apply the two required fixes using sed
-# 1. Change BSD_2_Clause to BSD_2Clause
-# 2. Change Apache_V2 to Apache_2_0
+
+# -- Replace the incorrect KAboutLicense::LicenseKey calls with the correct KAboutData::License enum
 
 TARGET_FILE="mauikit-imagetools/src/code/moduleinfo.cpp"
 
