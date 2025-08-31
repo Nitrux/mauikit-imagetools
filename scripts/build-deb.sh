@@ -40,8 +40,8 @@ rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 TARGET_FILE="mauikit-imagetools/src/code/moduleinfo.cpp"
 
 sed -i \
-    -e 's/KAboutLicense::LicenseKey::BSD_2_Clause/KAboutData::License::BSD_2_Clause/g' \
-    -e 's/KAboutLicense::LicenseKey::Apache_V2/KAboutData::License::Apache_2_0/g' \
+    -e 's/KAboutLicense::LicenseKey::BSD_2_Clause/QStringLiteral("BSD-2-Clause")/g' \
+    -e 's/KAboutLicense::LicenseKey::Apache_V2/QStringLiteral("Apache-2.0")/g' \
     "$TARGET_FILE"
 
 echo "✅ Patch applied successfully!"
