@@ -32,7 +32,7 @@ set -e
 
 git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://github.com/Nitrux/mauikit-imagetools-src.git
 
-rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
+rm -rf mauikit-imagetools-src/{examples,LICENSE,README.md}
 
 
 # -- Compile Source
@@ -51,7 +51,7 @@ cmake \
 	-DCMAKE_INSTALL_RUNSTATEDIR=/run "-GUnix Makefiles" \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_INSTALL_LIBDIR="/usr/lib/${HOST_MULTIARCH}" \
-	../mauikit-imagetools/
+	../mauikit-imagetools-src/
 
 make -j"$(nproc)"
 
