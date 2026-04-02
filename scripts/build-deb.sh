@@ -11,7 +11,7 @@ set -e
 
 # -- Download Source
 
-git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://invent.kde.org/maui/mauikit-imagetools.git
+git clone --depth 1 --branch "$MAUIKIT_IMAGETOOLS_BRANCH" https://github.com/Nitrux/mauikit-imagetools-src.git
 
 rm -rf mauikit-imagetools/{examples,LICENSE,README.md}
 
