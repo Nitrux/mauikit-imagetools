@@ -55,7 +55,8 @@ $APT_COMMAND install -y - --no-install-recommends \
     qt6-declarative-private-dev \
     qt6-multimedia-dev \
     qt6-positioning-dev \
-    qt6-svg-dev
+    qt6-svg-dev \
+    tesseract-ocr-all
 
 
 # -- Add package from our repository.
