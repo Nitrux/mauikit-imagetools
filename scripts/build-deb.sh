@@ -63,7 +63,7 @@ checkinstall -D -y \
 	--pkgrelease="1" \
 	--pkglicense=LGPL-3 \
 	--pkggroup=libs \
-	--pkgsource=mauikit-imagetools \
+	--pkgsource=mauikit-imagetools-src \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=mauikit-imagetools \
