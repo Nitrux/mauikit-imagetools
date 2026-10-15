@@ -26,12 +26,12 @@ $APT_COMMAND install -y --no-install-recommends \
     automake \
     autotools-dev \
     build-essential \
-    checkinstall \
-    cmake \
+    meson \
+    ninja-build \
+    pkg-config \
     curl \
     devscripts \
     equivs \
-    extra-cmake-modules \
     gettext \
     git \
     gnupg2 \
@@ -50,6 +50,7 @@ $APT_COMMAND install -y --no-install-recommends \
     libtesseract-dev \
     lintian \
     qt6-base-dev \
+    qt6-base-dev-tools \
     qt6-base-private-dev \
     qt6-declarative-dev \
     qt6-declarative-private-dev \
